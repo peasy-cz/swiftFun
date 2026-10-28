@@ -1,0 +1,48 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>FunCalc GIF review</title>
+<style>
+:root{--bg:#F7F3FF;--m:#8C52FF;--ok:#2FB67C;--no:#FF8A5B;--t:#2A1F4D}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font-family:system-ui,sans-serif;padding:12px;max-width:560px;margin:auto}
+.top{display:flex;justify-content:space-between;font-weight:800;margin-bottom:8px}
+.stage{display:grid;grid-template-columns:44px 1fr 44px;gap:6px;align-items:center}
+.arrow{font-size:34px;background:none;border:0;color:var(--m);height:80px}
+.frame{background:#fff;border:2px solid #D9CCFF;border-radius:16px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.frame img{max-width:100%;max-height:100%}
+#cap{text-align:center;margin:10px 0;font-weight:700}
+.votes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.v{font:800 20px system-ui;padding:16px;border-radius:16px;border:2px solid #D9CCFF;background:#fff}
+.v.y.on{background:var(--ok);color:#fff;border-color:var(--ok)}.v.n.on{background:var(--no);color:#fff;border-color:var(--no)}
+textarea{width:100%;margin-top:10px;border:2px solid #D9CCFF;border-radius:12px;padding:10px;font:16px system-ui;height:56px}
+.res{width:100%;margin-top:10px;padding:14px;border-radius:16px;border:0;background:var(--m);color:#fff;font:800 17px system-ui}
+#out{display:none}#out textarea{height:50vh;font-size:13px}
+</style></head><body>
+<div id="rev"><div class="top"><span id="pos"></span><span id="tally"></span></div>
+<div class="stage"><button class="arrow" id="prev">&lsaquo;</button><div class="frame"><img id="im" alt=""></div><button class="arrow" id="next">&rsaquo;</button></div>
+<div id="cap"></div>
+<div class="votes"><button class="v n" id="no">&#128078; Skip</button><button class="v y" id="yes">&#128077; Keep</button></div>
+<textarea id="cm" placeholder="Comment (optional)"></textarea>
+<button class="res" id="see">See results</button></div>
+<div id="out"><button class="res" id="copy">Copy results</button><textarea id="ta" readonly></textarea><button class="res" id="back" style="background:#2A1F4D">Back to review</button></div>
+<script>
+var G=[[1,"Ur8qw9UJEhNuw","Funny falling penguin"],[2,"mlvseq9yvZhba","Funny cat"],[3,"SwLdXjlGFXG0w","Baby laughing"],[4,"UmNb3MXKb1OsRzug5v","Puppy bichon frise"],[5,"KdYXl5KtTqorm","Baby goats pyjamas"],[6,"l41m54nolBBeVNGGA","Goat"],[7,"uyfgCPQeCjYMVxt2m3","Cute cat funny reaction"],[8,"3oz8xOUyiwvMfLqc4o","Laughing laugh"],[9,"qWzdbvq8HU2Fq","Goat"],[10,"FOL5mK0tXUmXe","Puppy burrito dog"],[11,"ZcXcaXXo39yOLHQAff","I love you come back dont go"],[12,"jEEeKrkCDjAjQ7upRy","Laugh babyface"],[13,"cLnmaTPkr0CBmFJjGo","Dance sky city"],[14,"vGo2sgzeC8r60","Corgi puppy cute"],[15,"gm3Z05VsyZsFG","Cat funny"],[16,"l41lLcizTeeAInp2o","Goat"],[17,"XhAQgt6ytc6E8","Otter yum"],[18,"tSjoI5BPjXsHzqQuCS","Pup works hard on toy tractor"],[19,"JTbjbxz2Blkypw4774","Cute zoo brookfield"],[20,"12yw5IsAAWhmvv6U3n","Otter"],[21,"J2tNIOLEHELkY","Penguin funny"],[22,"h2B3o1iqmzNOo","Love cute"],[23,"v6HmjWFF80ByC2JcRl","Funny cat"],[24,"oWD4VE913w0rd64maC","Twin baby laugh"],[25,"l2QZUJvl056arc4IU","Otter delighted"],[26,"ZQkiKOgnb10vY3k6tI7","Laughing otters sticker book"],[27,"G58IdVdzV1yg37YiWz","Funny dog"],[28,"u9vFMyx1Ix2l17Lc1n","Reaction cat surprised"],[29,"h59iqXVAai6DC","Penguin motivational cute funny"],[30,"7Kp3W7KmRZuN2","Otter"],[31,"ph6ewybUlGbW8","Baby"],[32,"3ov9k9AyzTiUCfsZrO","Cute puppy"],[33,"QEeQB8Kosm8Yh5WOF5","Dog pomeranian"],[34,"s4LzrsdXzm9MYVSzw8","Happy birthday dancing cat"],[35,"AK5orT4gIsiCA","Funny cute sea"],[36,"lkvupKOQfrxurIe5Sy","Happy baby smiling"],[37,"fxjyWi7GNGKgE","Funny baby"],[38,"zR9FNHTDN01YqTJRPJ","Funny penguin"],[39,"fWggYUinfI42WKhyJv","Funny reaction"],[40,"5T0csyuWb44eFOY1Hg","Funny reaction"],[41,"l41lFkqyUF9Uns0zS","Goat"],[42,"nqBfOunAYh8ZMFbqka","Funny penguin"],[43,"d1lhfGzYuqUZFgPA8z","Playing otter otters"],[44,"qGCKbJgVMetri","Cute pugs"],[45,"I88Ao3l3JDuipEDxzP","Dash pinguin"],[46,"cj30lAzw5pgD6","Goat"],[47,"eY9UBeh0THi1y","Baby jump goat"],[48,"N4WSvkZoks9SfqmZwm","Cute zoo"],[49,"3oEduLTjIQxYz5SSGY","Goat"],[50,"1SDN6kC0PLTlAvnftg","Puppy"],[51,"Wowj1abwRkpSo","Goat jumps"],[52,"BVXc0b6KPvDAQ","Dance baby moves"],[53,"gj0QdZ9FgqGhOBNlFS","Lol laugh laughing"],[54,"FfLirYjdNNPmU","Funny snow penguin"],[55,"A97DsLbVCEBBS","Baby"],[56,"nVDofmA9RaKic","Baby laughing"],[57,"ZFFVNwIbjsKtP3lHYK","Funny dog corgi"],[58,"12S5BqrFL93xxC","Running jump"],[59,"qKSIcNHVDlmyIqzG8Z","Penguin"],[60,"10e51llW9Wwy40","Baby goats pajamas"],[61,"Y0IWVaB4QgSz8QWqum","Charlie frenchie french bulldog"],[62,"hfpajDwL3NeHm","Funny cute dog"],[63,"Ch31IjylFWM8M","Funny cute"],[64,"TGKnLbfAzkk3DDNt8K","Funny model puppy"],[65,"S0Nokl7V0t4mfoYkLF","Cat funny derp"],[66,"125E8v90blHqtr4HrB","Cat dancing funny"],[67,"L48RzCCKfpwHK","Penguin funny"],[68,"4JCiJFD0XfYQ","Cute baby"],[69,"j93ycvEyWlSIIg8AEl","Dancing dog animal"],[70,"WS5a4SMjZGmPt0ND8L","Just kidding goat kid around"],[71,"e6bWuPBeDDAly","Penguin snow"],[72,"35Ly1l7SMUdW0","Baby goat"],[73,"C7grnU4M3o5on6ALso","Cat meow"],[74,"XL5ImGfUesg8g","Puppies river cutest"],[75,"ely3apij36BJhoZ234","Good job otter"],[76,"T3Vx6sVAXzuG4","Baby 90s"],[77,"xUPGcCFoTgYlXMCcFO","Baby adorable"],[78,"qrQ9L8WKocPufzxnkt","Emotion otter"],[79,"gdNrGDWQqmMAfU8lhx","Asian otters"],[80,"nLK0utBQcQXag0TYEp","Cute cat funny"],[81,"WXB88TeARFVvi","Cat funny"],[82,"UfrhmqjRL9bNK","Goat parkour"],[83,"9sAxOHpYk2UOq8FBC8","Cat kitten cute"],[84,"AtZKYbmuszStW","Funny cute"],[85,"GB0XWhoCDNNAW8M9vv","Cat ice cream"],[86,"m3ZopwlqTfe41oIKSK","Happy dance"],[87,"X8yORHVkdwJvB3h2oP","Funny water penguin"],[88,"TK6fEOfKSV2BIYy6B3","Laughing kid"],[89,"OOeKVbtXrd0cJhJFHh","Dog pomeranian"],[90,"2gqfSgPWPudl4d6dT7","Baby laughter"],[91,"Vx8MSphrScTAc","Soccer penguin funny"],[92,"vZzjJMiAiSXDO","Penguins polar bear"],[93,"tfWd8sVUAJGGk","Funny cute"],[94,"lv8qrl7TTuFj6QN3bM","Cute dog puppy"],[95,"l41lSWB1YEA0bPrLq","Goat"],[96,"WXjzQMl3R4XhaS7tXk","Cute animals surprising"],[97,"VBEd4PzBjdG3S","Funny animation"],[98,"jYu6L71Y9LjEuP2ufL","Best day ever greatest"],[99,"In0Lpu4FVivjISX9HT","Blep tongue sticking out cat"],[100,"3oEduJZLakwj3oGRna","Goat"]],K="funcalc-gif-v2",S={};try{S=JSON.parse(localStorage.getItem(K)||"{}")}catch(e){}
+var i=0;try{i=+localStorage.getItem(K+"p")||0}catch(e){}
+var $=function(x){return document.getElementById(x)};
+function u(id){return "https://media.giphy.com/media/"+id+"/giphy.gif"}
+function save(){try{localStorage.setItem(K,JSON.stringify(S));localStorage.setItem(K+"p",i)}catch(e){}}
+function show(){var g=G[i],s=S[g[0]]||{};$("pos").textContent=(i+1)+" / "+G.length;
+$("im").onerror=function(){$("cap").textContent="Did not load. Mark thumbs down and move on."};$("im").src=u(g[1]);$("cap").textContent="#"+g[0]+" - "+g[2];
+$("yes").className="v y"+(s.v=="y"?" on":"");$("no").className="v n"+(s.v=="n"?" on":"");$("cm").value=s.c||"";
+for(var k=1;k<=2;k++)if(G[i+k])new Image().src=u(G[i+k][1]);
+var y=0,n=0;for(var q in S){if(S[q].v=="y")y++;if(S[q].v=="n")n++}$("tally").textContent="Keep "+y+"  Skip "+n;save()}
+function cur(){var g=G[i];return S[g[0]]=S[g[0]]||{}}
+function vote(v){var o=cur();o.v=o.v==v?"":v;show()}
+$("yes").onclick=function(){vote("y")};$("no").onclick=function(){vote("n")};
+$("cm").oninput=function(){cur().c=this.value;save()};
+$("next").onclick=function(){if(i<G.length-1){i++;show()}};$("prev").onclick=function(){if(i>0){i--;show()}};
+function text(){var Y=[],N=[],X=[],C=[];G.forEach(function(g){var s=S[g[0]]||{},l=g[0]+" "+g[2]+" "+u(g[1]);
+if(s.v=="y")Y.push(l);else if(s.v=="n")N.push(l);else X.push(g[0]);if(s.c)C.push(g[0]+": "+s.c)});
+return "FunCalc GIF review (batch 2)\nYES ("+Y.length+"):\n"+Y.join("\n")+"\n\nNO ("+N.length+"):\n"+N.join("\n")+"\n\nNOT REVIEWED ("+X.length+"): "+X.join(", ")+"\n\nCOMMENTS:\n"+C.join("\n")}
+$("see").onclick=function(){$("ta").value=text();$("rev").style.display="none";$("out").style.display="block"};
+$("back").onclick=function(){$("out").style.display="none";$("rev").style.display="block"};
+$("copy").onclick=function(){var t=$("ta");t.select();try{navigator.clipboard.writeText(t.value)}catch(e){document.execCommand("copy")}this.textContent="Copied"};
+show();
+</script></body></html>
